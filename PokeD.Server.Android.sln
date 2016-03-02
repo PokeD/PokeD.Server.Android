@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeD.Server.Android", "PokeD.Server.Android.csproj", "{0BA4EE25-8DF8-4E6D-9E4E-1A326EB77FFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aragas.Core", "Aragas.Core\Aragas.Core.csproj", "{468D9D51-DFE7-47A8-B0D6-52D035FC714D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeD.Core", "PokeD.Core\PokeD.Core.csproj", "{1CF84E56-3BBE-4A3A-9234-5951BF2558C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeD.Server", "PokeD.Server\PokeD.Server.csproj", "{32FDE5FC-8692-414A-A0A5-921CE83C709C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BA4EE25-8DF8-4E6D-9E4E-1A326EB77FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BA4EE25-8DF8-4E6D-9E4E-1A326EB77FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BA4EE25-8DF8-4E6D-9E4E-1A326EB77FFA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0BA4EE25-8DF8-4E6D-9E4E-1A326EB77FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BA4EE25-8DF8-4E6D-9E4E-1A326EB77FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BA4EE25-8DF8-4E6D-9E4E-1A326EB77FFA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{468D9D51-DFE7-47A8-B0D6-52D035FC714D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{468D9D51-DFE7-47A8-B0D6-52D035FC714D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{468D9D51-DFE7-47A8-B0D6-52D035FC714D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{468D9D51-DFE7-47A8-B0D6-52D035FC714D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF84E56-3BBE-4A3A-9234-5951BF2558C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF84E56-3BBE-4A3A-9234-5951BF2558C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF84E56-3BBE-4A3A-9234-5951BF2558C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF84E56-3BBE-4A3A-9234-5951BF2558C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32FDE5FC-8692-414A-A0A5-921CE83C709C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32FDE5FC-8692-414A-A0A5-921CE83C709C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32FDE5FC-8692-414A-A0A5-921CE83C709C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32FDE5FC-8692-414A-A0A5-921CE83C709C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

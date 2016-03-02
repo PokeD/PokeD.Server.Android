@@ -1,0 +1,19 @@
+language: csharp
+mono:
+  - latest
+
+solution: PokeD.Server.Android.sln
+
+before_install:
+  - git submodule update --init --recursive
+  
+install:
+  - nuget restore PokeD.Server.Android.sln
+
+script:
+  - xbuild /p:Configuration=Release PokeD.Server.Android.sln
+  - xbuild /p:Configuration=Debug PokeD.Server.Android.sln
+
+notifications:
+  email:
+    on_success: always
