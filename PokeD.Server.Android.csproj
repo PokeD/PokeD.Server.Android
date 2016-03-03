@@ -107,9 +107,6 @@
     <EmbeddedResource Include="Lua\modules\hook.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lua\lang\ru - Copy.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include="Lua\modules\README" />
     <EmbeddedResource Include="Lua\modules\translator.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
