@@ -13,6 +13,8 @@ namespace PokeD.Server.Android
     [Activity(Label = "PokeD Server", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.SensorPortrait, LaunchMode = LaunchMode.SingleInstance)]
     public class MainActivity : Activity
     {
+        public static Action<Action> RunOnUI { get; set; }
+
         private Thread _serverMainThread;
         private Thread _serverStopThread;
 
@@ -27,7 +29,7 @@ namespace PokeD.Server.Android
             FindViewById<Button>(Resource.Id.Button02).Click += MainActivity_02_Click;
             FindViewById<Button>(Resource.Id.Button03).Click += MainActivity_03_Click;
 
-            InputWrapperInstance.RunOnUI += RunOnUiThread;
+            RunOnUI += RunOnUiThread;
         }
 
         private void MainActivity_02_Click(object sender, EventArgs e)

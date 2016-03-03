@@ -14,7 +14,7 @@ namespace PokeD.Server.Android
                 Server?.Stop();
                 Console.WriteLine("Stopped the server. Press any key to continue...");
                 Console.Read();
-                Environment.Exit((int) ExitCodes.Success);
+                //Environment.Exit((int) ExitCodes.Success);
             }
 
             else if (command.StartsWith("help server"))

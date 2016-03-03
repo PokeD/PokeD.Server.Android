@@ -27,16 +27,16 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
-    <AndroidLinkSkip />
+    <AndroidLinkSkip>
+    </AndroidLinkSkip>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-    <BundleAssemblies>False</BundleAssemblies>
-    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-    <AndroidSupportedAbis />
-    <AndroidStoreUncompressedFileExtensions />
-    <MandroidI18n />
+    <AndroidSupportedAbis>
+    </AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions>
+    </AndroidStoreUncompressedFileExtensions>
+    <MandroidI18n>
+    </MandroidI18n>
     <Debugger>Xamarin</Debugger>
-    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,9 +57,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="MoonSharp.Interpreter, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>packages\MoonSharp.1.5.0.1\lib\portable-net4+sl5+wp8+win8\MoonSharp.Interpreter.dll</HintPath>
-    </Reference>
-    <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -101,9 +98,29 @@
     <Compile Include="WrapperInstances\YamlSerialization.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Lua\lang\en.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lua\lang\ru.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lua\modules\hook.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lua\lang\ru - Copy.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Lua\modules\README" />
+    <EmbeddedResource Include="Lua\modules\translator.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lua\npc_announcer.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lua\npc_gregory.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Resources\AboutResources.txt" />
-    <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -121,24 +138,17 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Aragas.Core\Aragas.Core.csproj">
-      <Project>{468d9d51-dfe7-47a8-b0d6-52d035fc714d}</Project>
+      <Project>{468D9D51-DFE7-47A8-B0D6-52D035FC714D}</Project>
       <Name>Aragas.Core</Name>
     </ProjectReference>
     <ProjectReference Include="PokeD.Core\PokeD.Core.csproj">
-      <Project>{1cf84e56-3bbe-4a3a-9234-5951bf2558c3}</Project>
+      <Project>{1CF84E56-3BBE-4A3A-9234-5951BF2558C3}</Project>
       <Name>PokeD.Core</Name>
     </ProjectReference>
     <ProjectReference Include="PokeD.Server\PokeD.Server.csproj">
-      <Project>{32fde5fc-8692-414a-a0a5-921ce83c709c}</Project>
+      <Project>{32FDE5FC-8692-414A-A0A5-921CE83C709C}</Project>
       <Name>PokeD.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-     Other similar extension points exist, see Microsoft.Common.targets.
-		<Target Name="BeforeBuild">
-		</Target>
-		<Target Name="AfterBuild">
-		</Target>
- -->
 </Project>

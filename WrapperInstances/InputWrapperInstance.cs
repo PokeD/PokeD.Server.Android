@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+
 using Android.Widget;
 
 using Aragas.Core.Wrappers;
@@ -10,9 +9,8 @@ namespace PokeD.Server.Android.WrapperInstances
 {
     public class InputWrapperInstance : IInputWrapper
     {
-        public static Action<Action> RunOnUI;
-        public static TextView TextView { get; set; }
-        private static List<string> Lines { get; set; } = new List<string>();
+        public static TextView TextView { private get; set; }
+        private static List<string> Lines { get; } = new List<string>();
 
         public event EventHandler<KeyPressedEventArgs> KeyPressed;
 
@@ -28,7 +26,7 @@ namespace PokeD.Server.Android.WrapperInstances
             if (Lines.Count > Math.Floor(TextView.LineHeight * 0.70f))
                 Lines.RemoveAt(0);
 
-            RunOnUI(() => TextView.Text = string.Join(Environment.NewLine, Lines));
+            MainActivity.RunOnUI(() => TextView.Text = string.Join(Environment.NewLine, Lines));
         }
 
         public void LogWriteLine(DateTime time, string message)

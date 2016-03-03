@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 using Aragas.Core.Wrappers;
-
-using NDesk.Options;
 
 using PCLStorage;
 
@@ -21,52 +16,21 @@ using PokeD.Server.Android.WrapperInstances;
 
 namespace PokeD.Server.Android
 {
-    public static class TaskExtension
-    {
-        public static TResult Wait<TResult>(this Task<TResult> task, CancellationTokenSource cancellationTokenSource)
-        {
-            try
-            {
-                task.Wait(cancellationTokenSource.Token);
-                return task.Result;
-            }
-            catch(Exception ex) { throw task?.Exception ?? ex; }
-        }
-    }
-
     public static partial class Program
     {
-        private struct FBReport
-        {
-            public string Description;
-            public string ErrorCode;
-            public DateTime Date;
-        }
-
-
         private const string REPORTURL = "http://poked.github.io/report/";
-        private const string FBURL = "https://poked.firebaseio.com/";
         private static Server Server { get; set; }
-
-        private static bool NATForwardingEnabled { get; set; }
 
 
         static Program()
         {
             AppDomainWrapper.Instance = new AppDomainWrapperInstance();
+            DatabaseWrapper.Instance = new SQLiteDatabase();
             FileSystemWrapper.Instance = new FileSystemWrapperInstance();
             InputWrapper.Instance = new InputWrapperInstance();
-
             ConfigWrapper.Instance = new YamlConfigFactoryInstance();
-            
             LuaWrapper.Instance = new MoonLuaWrapperInstance();
-
-			DatabaseWrapper.Instance = new SQLiteDatabase();
-
-            //LuaWrapper.Instance = new MoonLuaWrapperInstance();
-
-            //NancyWrapper.Instance = new NancyWrapperInstance();
-
+            NancyWrapper.Instance = new NancyWrapperInstance();
             TCPClientWrapper.Instance = new TCPClientFactoryInstance();
             TCPListenerWrapper.Instance = new TCPServerWrapperInstance();
             ThreadWrapper.Instance = new ThreadWrapperInstance();
@@ -84,83 +48,7 @@ namespace PokeD.Server.Android
                 Stop();
             }
 
-            ParseArgs(args);
-
             Start();
-        }
-
-        private static void ParseArgs(IEnumerable<string> args)
-        {
-            var options = new OptionSet();
-            try
-            {
-                options = new OptionSet()
-                    .Add("db|database=", "used {DATABASE_WRAPPER}.", ParseDatabase)
-                    .Add("cf|config=", "used {CONFIG_WRAPPER}.", ParseConfig)
-                    .Add("n|nat", "enables NAT port forwarding.", str => NATForwardingEnabled = true)
-                    .Add("h|help", "show help.", str => ShowHelp(options));
-
-                options.Parse(args);
-            }
-            catch (Exception ex) when (ex is OptionException || ex is FormatException)
-            {
-                Console.Write("PokeD.Server.Desktop: ");
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Try `PokeD.Server.Desktop --help' for more information.");
-
-                ShowHelp(options, true);
-
-                Console.WriteLine();
-                Console.WriteLine("Press any key to continue...");
-                Console.Read();
-                Environment.Exit((int) ExitCodes.Success);
-            }
-        }
-        private static void ShowHelp(OptionSet options, bool direct = false)
-        {
-            if (direct)
-            {
-                Console.WriteLine("Usage: PokeD.Server.Desktop [OPTIONS]");
-                Console.WriteLine();
-                Console.WriteLine("Options:");
-
-                options.WriteOptionDescriptions(Console.Out);
-            }
-            else
-            {
-            }
-        }
-        private static void ParseDatabase(string database)
-        {
-            switch (database.ToLowerInvariant())
-            {
-                case "sql":
-                case "sqldb":
-                case "sqlite":
-                case "sqlitedb":
-                    DatabaseWrapper.Instance = new SQLiteDatabase();
-                    break;
-
-                default:
-                    throw new FormatException("DATABASE_WRAPPER not correct.");
-            }
-        }
-        private static void ParseConfig(string config)
-        {
-            switch (config.ToLowerInvariant())
-            {
-                case "json":
-                    ConfigWrapper.Instance = new JsonConfigFactoryInstance();
-                    break;
-
-                case "yml":
-                case "yaml":
-                    ConfigWrapper.Instance = new YamlConfigFactoryInstance();
-                    break;
-
-                default:
-                    throw new FormatException("CONFIG_WRAPPER not correct.");
-            }
         }
         private static void ReportErrorLocal(string exception)
         {

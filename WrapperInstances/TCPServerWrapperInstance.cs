@@ -59,58 +59,6 @@ namespace PokeD.Server.Android.WrapperInstances
         }
     }
 
-    public class TCPListener : ITCPListener
-    {
-        public ushort Port { get; }
-        public bool AvailableClients => Listener.Pending();
-
-        private TcpListener Listener { get; }
-
-        private bool IsDisposed { get; set; }
-
-
-        internal TCPListener(ushort port)
-        {
-            Port = port;
-
-            var endpoint = new IPEndPoint(IPAddress.Any, Port);
-            Listener = new TcpListener(endpoint);
-        }
-
-        public void Start()
-        {
-            if (IsDisposed)
-                return;
-
-            Listener.Start();
-        }
-        public void Stop()
-        {
-            if (IsDisposed)
-                return;
-
-            Listener.Stop();
-        }
-
-        public ITCPClient AcceptTCPClient()
-        {
-            if (IsDisposed)
-                return null;
-
-            return TCPClientFactoryInstance.CreateTCPClient(Listener.AcceptSocket());
-        }
-
-        public void Dispose()
-        {
-            if (IsDisposed)
-                return;
-
-            IsDisposed = true;
-
-            Listener?.Server.Dispose();
-        }
-    }
-
     public class TCPServerWrapperInstance : ITCPListenerWrapper
     {  
         public ITCPListener CreateTCPListener(ushort port) { return new SocketTCPListener (port); }

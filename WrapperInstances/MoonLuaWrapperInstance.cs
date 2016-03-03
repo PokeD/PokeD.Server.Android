@@ -88,11 +88,8 @@ namespace PokeD.Server.Android.WrapperInstances
             // Register custom modules that we allow to use.
             RegisterModule("hook");
             RegisterModule("translator");
-            //LuaScript.Globals["Shit"] = new Table(LuaScript);
-            //var t = LuaScript.LoadFile("translator", LuaScript.Globals["Shit"] as Table);
-            //LuaScript.DoFile("hook");
-            //LuaScript.DoFile("translator");
 
+            // Register custom types that we allow to use.
             RegisterCustom(LuaScript.Globals);
 
 
@@ -120,11 +117,10 @@ namespace PokeD.Server.Android.WrapperInstances
         }
         private string[] GetFiles(string path)
         {
-            IFolder folder = FileSystemWrapper.LuaFolder;
+            var folder = FileSystemWrapper.LuaFolder;
 
             var dirs = path.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar).Reverse().Skip(1).Reverse();
-            foreach (var dir in dirs)
-                folder = folder.CreateFolderAsync(dir, CreationCollisionOption.OpenIfExists).Result;
+            folder = dirs.Aggregate(folder, (current, dir) => current.CreateFolderAsync(dir, CreationCollisionOption.OpenIfExists).Result);
 
             var files = folder.GetFilesAsync().Result;
 
@@ -144,7 +140,6 @@ namespace PokeD.Server.Android.WrapperInstances
         }
         private void RegisterCustom(Table table)
         {
-            // Register custom types that we allow to use.
             table["Vector3"] = (Func<float, float, float, Vector3>)((x, y, z) => new Vector3(x, y, z));
             table["Vector2"] = (Func<float, float, Vector2>)((x, y) => new Vector2(x, y));
             table["CompileFile"] = (Func<string, Table>) CompileFile;
@@ -166,14 +161,7 @@ namespace PokeD.Server.Android.WrapperInstances
             return false;
         }
 
-        public override object[] CallFunction(string functionName, params object[] args)
-        {
-            return LuaScript.Call(LuaScript.Globals[functionName], args).Tuple;
-            //var t = LuaScript.Call(LuaScript.Globals[functionName], args);
-            //return t.Tuple;
-            //return LuaScript.Call(LuaScript.Globals[functionName], args).Tuple;
-            //return LuaScript.Call(LuaScript.Globals[functionName], args).Tuple.Select(obj => (object) obj).ToArray();
-        }
+        public override object[] CallFunction(string functionName, params object[] args) => LuaScript.Call(LuaScript.Globals[functionName], args).Tuple;
     }
 
     public class MoonLuaTable : LuaTable
